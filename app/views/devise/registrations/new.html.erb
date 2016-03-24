@@ -21,6 +21,13 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= label_tag :role_admin, "Менеджер" %>
+    <%= radio_button_tag :role, "admin",{:checked => true} %>
+    <%= label_tag :role_user, "Исполнитель" %>
+    <%= radio_button_tag :role, "user" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
