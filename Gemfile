@@ -14,8 +14,14 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 gem 'cancancan'
 gem 'rolify'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-select-rails'
 
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # Use jquery as the JavaScript library

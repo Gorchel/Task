@@ -1,0 +1,40 @@
+<div class="container text-center">
+<% if current_user.has_role? :manager %>
+  <% user_name = "менеджера"%>
+<% else %>
+  <% user_name = "клиента"%>
+<% end %>
+
+<h2>Заполните данные <%= user_name %> </h2>
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+       <%= form_for(@user_description) do |f| %>
+          <div class="form-group">
+             <%= f.label :first_name, "Имя *" %><br />
+             <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :last_name, "Фамилия *" %><br />
+             <%= f.text_field :last_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :birthday, "Дата рождения *" %><br />
+             <%= f.date_field :birthday, class: "form-control" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :country_id, "Страна *" %><br />
+             <%= f.select(:country_id,  '<option value="0">Не выбрана</option>'.html_safe + options_from_collection_for_select(@countries, :id, :title_ru), {}, { :class => 'form-control'}) %><br />
+          </div>
+          <div class="form-group">
+             <%= f.label :telefon, "Телефон" %><br />
+             <%= f.telephone_field :telefon, class: "form-control" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :skype, "Skype" %><br />
+             <%= f.text_field :skype, class: "form-control" %>
+          </div>
+          <%= f.submit "Сохранить данные", class: 'btn btn-success' %>
+       <% end %>
+    </div>
+</div>
+

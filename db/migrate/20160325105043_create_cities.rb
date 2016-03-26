@@ -5,7 +5,7 @@ class CreateCities < ActiveRecord::Migration
 	  t.references :country
 	  t.references :region , null: true
 
-	  t.boolean :important
+	    t.boolean :important ,null: true
 
       t.string :title_ru ,null: true
       t.string :title_ua ,null: true
