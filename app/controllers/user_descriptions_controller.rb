@@ -9,6 +9,11 @@ class UserDescriptionsController < ApplicationController
   	if current_user.user_description.blank?
    	   @user_description = UserDescription.new
    	   @countries = Country.all
+
+      if current_user.has_role? :user
+        @skills = Skill.all
+      end
+
    	else
    	   redirect_to root_path
    	end	
@@ -16,13 +21,18 @@ class UserDescriptionsController < ApplicationController
 
   def create
   	@user_description = UserDescription.new(user_description_params.merge(user_id: current_user.id))
+
+    params[:skills].each do |skill_id|
+      current_user.skills << Skill.find(skill_id)
+    end
+      
   	respond_to do |format|
-		if @user_description.save
-			format.html { redirect_to root_path, notice: 'User description was successfully created.' }
-		else
-			format.html { render :new }
-		end
-	end
+  		if @user_description.save
+  			format.html { redirect_to root_path, notice: 'User description was successfully created.' }
+  		else
+  			format.html { render :new }
+  		end
+  	end
   end
 
   def edit

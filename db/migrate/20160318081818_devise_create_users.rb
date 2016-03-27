@@ -32,6 +32,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.references :skill
 
+      #omniauth
+      t.string :provider
+      t.string :uid
+
       t.timestamps null: false
     end
 

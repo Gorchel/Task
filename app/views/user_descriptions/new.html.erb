@@ -25,6 +25,14 @@
              <%= f.label :country_id, "Страна *" %><br />
              <%= f.select(:country_id,  '<option value="0">Не выбрана</option>'.html_safe + options_from_collection_for_select(@countries, :id, :title_ru), {}, { :class => 'form-control'}) %><br />
           </div>
+
+          <% if current_user.has_role? :user %>
+            <div class="form-group">
+              <%= label_tag :skills, "Выберите свои навыки" %><br />
+              <%= select_tag :skills,  '<option value="0">Не выбран</option>'.html_safe + options_from_collection_for_select(@skills, :id, :name),multiple: true , :class => 'form-control' %><br />
+            </div>
+          <% end %>
+        
           <div class="form-group">
              <%= f.label :telefon, "Телефон" %><br />
              <%= f.telephone_field :telefon, class: "form-control" %>

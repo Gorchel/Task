@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326082204) do
+ActiveRecord::Schema.define(version: 20160325105058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,13 @@ ActiveRecord::Schema.define(version: 20160326082204) do
 
   add_index "skills", ["name"], name: "index_skills_on_name", using: :btree
 
+  create_table "skills_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "skill_id"
+  end
+
+  add_index "skills_users", ["user_id", "skill_id"], name: "index_skills_users_on_user_id_and_skill_id", using: :btree
+
   create_table "user_descriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "first_name", default: "",            null: false
@@ -135,10 +142,10 @@ ActiveRecord::Schema.define(version: 20160326082204) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.integer  "skill_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
     t.string   "provider"
     t.string   "uid"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -152,12 +159,5 @@ ActiveRecord::Schema.define(version: 20160326082204) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
-
-  create_table "users_skills", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "skill_id"
-  end
-
-  add_index "users_skills", ["user_id", "skill_id"], name: "index_users_skills_on_user_id_and_skill_id", using: :btree
 
 end
