@@ -1,5 +1,6 @@
 class UserDescriptionsController < ApplicationController
-
+  skip_before_action :registrate_user_description!
+  
   def index
    
   end
